@@ -11,6 +11,23 @@ export class CounterEvent extends Event {
     static COUNTER_FINISHED = "onCounterFinished";
 }
 
+export class CounterEvent2 extends Event {
+    static COUNTER_STARTED = "onCounterStarted";
+    static COUNTER_CHANGED = "onCounterChanged";
+    static COUNTER_FINISHED = "onCounterFinished";
+
+    private _count: number;
+
+    constructor(type: string, sender: IEventEmitter, count: number) {
+        super(type, sender);
+        this._count = count;
+    }
+
+    get count() {
+        return this._count;
+    }
+}
+
 export class Counter extends EventEmitter {
     private _start: number;
     private _stop: number;
@@ -72,11 +89,21 @@ export class Counter2 implements IEventEmitter {
     }
 
     run() {
-        this.emit(new CounterEvent(CounterEvent.COUNTER_STARTED, this));
+        this.emit(
+            new CounterEvent2(CounterEvent2.COUNTER_STARTED, this, this._count)
+        );
         for (; this._count < this._stop; this._count += this._step) {
-            this.emit(new CounterEvent(CounterEvent.COUNTER_CHANGED, this));
+            this.emit(
+                new CounterEvent2(
+                    CounterEvent2.COUNTER_CHANGED,
+                    this,
+                    this._count
+                )
+            );
         }
-        this.emit(new CounterEvent(CounterEvent.COUNTER_FINISHED, this));
+        this.emit(
+            new CounterEvent2(CounterEvent2.COUNTER_FINISHED, this, this._count)
+        );
     }
 
     get count() {
