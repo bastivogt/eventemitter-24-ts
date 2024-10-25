@@ -1,4 +1,9 @@
-export interface IEventEmitter {}
+export interface IEventEmitter {
+    hasListener(type: string): boolean;
+    addListener(type: string, Listener: ListenerFunction<Event>): boolean;
+    removeListener(type: string): boolean;
+    emit(event: Event): boolean;
+}
 
 type ListenerFunction<ET extends Event> = (event: ET) => void;
 
@@ -9,9 +14,9 @@ export interface IListener<ET extends Event> {
 
 export class Event {
     private _type: string;
-    private _sender: IEventEmitter;
+    private _sender: object;
 
-    constructor(type: string, sender: IEventEmitter) {
+    constructor(type: string, sender: object) {
         this._type = type;
         this._sender = sender;
     }

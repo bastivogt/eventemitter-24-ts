@@ -18,7 +18,7 @@ export class CounterEvent2 extends Event {
 
     private _count: number;
 
-    constructor(type: string, sender: IEventEmitter, count: number) {
+    constructor(type: string, sender: object, count: number) {
         super(type, sender);
         this._count = count;
     }
