@@ -27,19 +27,16 @@ console.log("---------------------------------");
 
 const c2 = new Counter2(100, 200, 10);
 
-c2.addListener(CounterEvent2.COUNTER_STARTED, (event: CounterEvent) => {
-    const counterEvent = event as CounterEvent2;
-    console.log(counterEvent.type, counterEvent.count);
+c2.addListener(CounterEvent2.COUNTER_STARTED, (event: CounterEvent2) => {
+    console.log(event.type, event.count);
 });
 
-c2.addListener(CounterEvent2.COUNTER_CHANGED, (event: CounterEvent) => {
-    const counterEvent = event as CounterEvent2;
-    console.log(counterEvent.type, counterEvent.count);
+c2.addListener(CounterEvent2.COUNTER_CHANGED, (event: CounterEvent2) => {
+    console.log(event.type, event.count);
 });
 
-c2.addListener(CounterEvent2.COUNTER_FINISHED, (event: CounterEvent) => {
-    const counterEvent = event as CounterEvent2;
-    console.log(counterEvent.type, counterEvent.count);
+c2.addListener(CounterEvent2.COUNTER_FINISHED, (event: CounterEvent2) => {
+    console.log(event.type, event.count);
 });
 
 //c2.removeListener(CounterEvent.COUNTER_CHANGED);

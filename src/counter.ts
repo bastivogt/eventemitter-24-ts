@@ -28,7 +28,7 @@ export class CounterEvent2 extends Event {
     }
 }
 
-export class Counter extends EventEmitter {
+export class Counter extends EventEmitter<CounterEvent> {
     private _start: number;
     private _stop: number;
     private _step: number;
@@ -56,7 +56,7 @@ export class Counter extends EventEmitter {
 }
 
 export class Counter2 implements IEventEmitter {
-    private _em: EventEmitter;
+    private _em: EventEmitter<CounterEvent2>;
 
     private _start: number;
     private _stop: number;
@@ -76,7 +76,10 @@ export class Counter2 implements IEventEmitter {
         return this._em.hasListener(type);
     }
 
-    addListener(type: string, listener: (event: Event) => void): boolean {
+    addListener(
+        type: string,
+        listener: (event: CounterEvent2) => void
+    ): boolean {
         return this._em.addListener(type, listener);
     }
 
@@ -84,7 +87,7 @@ export class Counter2 implements IEventEmitter {
         return this._em.removeListener(type);
     }
 
-    emit(event: Event): boolean {
+    emit(event: CounterEvent2): boolean {
         return this._em.emit(event);
     }
 

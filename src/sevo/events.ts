@@ -1,15 +1,10 @@
-export interface IEventEmitter {
-    hasListener(type: string): boolean;
-    addListener(type: string, listener: ListenerFunction): boolean;
-    removeListener(type: string): boolean;
-    emit(event: Event): boolean;
-}
+export interface IEventEmitter {}
 
-type ListenerFunction = (event: Event) => void;
+type ListenerFunction<ET extends Event> = (event: ET) => void;
 
-export interface IListener {
+export interface IListener<ET extends Event> {
     type: string;
-    listener: ListenerFunction;
+    listener: ListenerFunction<ET>;
 }
 
 export class Event {
@@ -30,8 +25,8 @@ export class Event {
     }
 }
 
-export class EventEmitter implements IEventEmitter {
-    protected _listeners: IListener[];
+export class EventEmitter<ET extends Event> implements IEventEmitter {
+    protected _listeners: IListener<ET>[];
 
     constructor() {
         this._listeners = [];
@@ -46,7 +41,7 @@ export class EventEmitter implements IEventEmitter {
         return false;
     }
 
-    addListener(type: string, listener: ListenerFunction): boolean {
+    addListener(type: string, listener: ListenerFunction<ET>): boolean {
         if (!this.hasListener(type)) {
             this._listeners.push({ type, listener });
             return true;
@@ -66,7 +61,7 @@ export class EventEmitter implements IEventEmitter {
         return false;
     }
 
-    emit(event: Event): boolean {
+    emit(event: ET): boolean {
         if (this.hasListener(event.type)) {
             for (let i = 0; i < this._listeners.length; i++) {
                 if (this._listeners[i].type === event.type) {
