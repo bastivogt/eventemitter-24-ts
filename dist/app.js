@@ -15,6 +15,7 @@ c.addListener(CounterEvent.COUNTER_FINISHED, (event) => {
 });
 //c.removeListener(CounterEvent.COUNTER_CHANGED);
 c.run();
+console.log(c.listeners);
 console.log("---------------------------------");
 const c2 = new Counter2(100, 200, 10);
 c2.addListener(CounterEvent2.COUNTER_STARTED, (event) => {
@@ -28,3 +29,4 @@ c2.addListener(CounterEvent2.COUNTER_FINISHED, (event) => {
 });
 //c2.removeListener(CounterEvent.COUNTER_CHANGED);
 c2.run();
+console.log(c2.listeners);

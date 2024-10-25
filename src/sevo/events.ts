@@ -3,6 +3,7 @@ export interface IEventEmitter {
     addListener(type: string, Listener: ListenerFunction<Event>): boolean;
     removeListener(type: string): boolean;
     emit(event: Event): boolean;
+    listeners: unknown; // getter
 }
 
 type ListenerFunction<ET extends Event> = (event: ET) => void;
@@ -75,5 +76,9 @@ export class EventEmitter<ET extends Event> implements IEventEmitter {
             }
         }
         return false;
+    }
+
+    get listeners() {
+        return this._listeners;
     }
 }

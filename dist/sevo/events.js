@@ -50,4 +50,7 @@ export class EventEmitter {
         }
         return false;
     }
+    get listeners() {
+        return this._listeners;
+    }
 }

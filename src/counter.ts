@@ -91,6 +91,10 @@ export class Counter2 implements IEventEmitter {
         return this._em.emit(event);
     }
 
+    get listeners() {
+        return this._em.listeners;
+    }
+
     run() {
         this.emit(
             new CounterEvent2(CounterEvent2.COUNTER_STARTED, this, this._count)
