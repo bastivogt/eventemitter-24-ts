@@ -79,6 +79,6 @@ export class EventEmitter<ET extends Event> implements IEventEmitter {
     }
 
     get listeners() {
-        return this._listeners;
+        return [...this._listeners];
     }
 }
